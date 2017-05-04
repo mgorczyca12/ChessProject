@@ -9,8 +9,8 @@ public abstract class Piece{
 	{
 		this.color = side;
 		this.Column = col;
-        this.Row = row;
-        this.name = name;
+        	this.Row = row;
+       		this.name = name;
 	}
 
 	public String getColor()
