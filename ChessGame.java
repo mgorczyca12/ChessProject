@@ -25,12 +25,13 @@ public class ChessGame extends JFrame implements Runnable{
 		this.setVisible(true);
 
 		mainPanel.add(new JComponent(){
-			{this.setBounds(100,1
-			00,100,100);}
+			{this.setBounds(100,100,100,100);}
 			public void paintComponent(Graphics g){
 				g.setColor(new Color(120,244,12));
 				g.fillRect(0,0,100,100);
 			}}, 1);
+
+		mainPanel.remove(mainPanel.getComponents()[0]);
 
 	}
     public static void main(String []args)
@@ -41,6 +42,11 @@ public class ChessGame extends JFrame implements Runnable{
 class Menu extends JPanel {
 	java.util.List<JButton> buttons = new ArrayList<>();
 	public void add(JButton b){
+		buttons.add(b);
 		this.add(b);
+	}
+	public Menu(){
+		super();
+		this.setLayout(new BoxLayout(this,BoxLayout.LINE_AXIS));
 	}
 }
