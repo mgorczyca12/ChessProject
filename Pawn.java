@@ -8,16 +8,16 @@ public class Pawn extends Piece
 
 	public int[][] possibleMoves(Board b)
 	{
-		int i = 0;
-		int[][] array = new int[28][2];
+		ArrayList<Integer> moveX = new ArrayList<Integer>();
+		ArrayList<Integer> moveY = new ArrayList<Integer>();
+		
 
-		if([Row+1][Col+1].isAvailable) //find way to get get pawn and identify were it is on the board and how to move it
+		if(ChessBoard.getBoard()[super.getRow()+1][super.getCol()+1].isAvailable()) //find way to get get pawn and identify were it is on the board and how to move it
 		{
-			i++;
+			moveX.add()
 		}
-
+		
 		return array;
-
 	}
 
 	public String showPossibleMoves()
