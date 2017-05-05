@@ -28,6 +28,16 @@ public abstract class Piece{
 
 		return str;
 	}
+	
+	public int getRow()
+	{
+		return Row;
+	}
+	
+	public int getCol()
+	{
+		return Column;
+	}
 
 
 
