@@ -1,4 +1,4 @@
-public class ChessBoard
+public static class ChessBoard
 {
 	Spot[][] board;
 
