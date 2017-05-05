@@ -36,6 +36,11 @@ public class Spot{
         }
     }
 
+	public char getPeiceSide()
+	{
+		return currentPeice.getSide();
+	}
+
     public String toString()
     {
 		String str = "\nCurrent Piece: " + currentPiece.toString();
