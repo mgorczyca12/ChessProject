@@ -2,10 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.beans.*;
 
 public class ChessGame extends JFrame implements Runnable{
 
-	MouseListener menuListener;
+	Action startAction;
+	Action creditsAction;
+	Action exitAction;
 	JLayeredPane mainPanel;
 
 	public ChessGame(){super();}
@@ -23,30 +26,37 @@ public class ChessGame extends JFrame implements Runnable{
 
 		this.add(mainPanel);
 		this.setVisible(true);
-		//test things
-		/*
-		mainPanel.add(new JComponent(){
-			{this.setBounds(100,100,100,100);}
-			public void paintComponent(Graphics g){
-				g.setColor(new Color(120,244,12));
-				g.fillRect(0,0,100,100);
-			}}, 1);
-		mainPanel.add(new JComponent(){
-			{this.setBounds(200,200,100,100);}
-			public void paintComponent(Graphics g){
-				g.setColor(new Color(120,244,12));
-				g.fillRect(0,0,100,100);
-			}}, 2);
-		mainPanel.remove(mainPanel.getComponents()[0]);
-		//*/
+
 		Menu menu = new Menu();
 		menu.setBounds(0,0,700,700);
-		JButton tButton = new JButton("Play");
-		JButton tButton1 = new JButton("Credits");
-		JButton tButton2 = new JButton("Quit");
-		menu.add(tButton);
-		menu.add(tButton1);
-		menu.add(tButton2);
+
+		startAction = new AbstractAction("Start"){
+			public void actionPerformed(ActionEvent a){
+				//to be implemented
+
+			}
+		};
+		creditsAction = new AbstractAction("Credits"){
+			public void actionPerformed(ActionEvent a){
+				Credits c = new Credits();
+				c.setBounds(0,0,700,700);
+				mainPanel.add(c,2);
+			}
+
+		};
+		exitAction = new AbstractAction("Quit"){
+			public void actionPerformed(ActionEvent a){
+				System.exit(0);
+			}
+		};
+
+		
+		JButton play = new JButton(startAction);
+		JButton credits = new JButton(creditsAction);
+		JButton quit = new JButton(exitAction);
+		menu.add(play);
+		menu.add(credits);
+		menu.add(quit);
 		mainPanel.add(menu,1);
 
 	}
@@ -71,3 +81,10 @@ class Menu extends JPanel {
 
 	}
 }
+class Credits extends JComponent {
+	public Credits(){
+		super();
+		this.add(new JComponent(){public void paintComponent(Graphics g){g.setColor(new Color(100,200,0));g.fillRect(100,100,100,100);}});
+	}
+}
+
