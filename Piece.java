@@ -1,38 +1,22 @@
-public abstract class Piece{
+public abstract class Piece
+{
 
-	protected final char color;
+	protected final char side;
 	protected int Column;
 	protected int Row;
 	protected final String name;
 
-	public Piece(String side, int row, int col, String name)
+	public Piece(char side, int row, int col, String name)
 	{
-		this.color = side;
+		this.side = side;
 		this.Column = col;
-        	this.Row = row;
-       		this.name = name;
-	}
-
-	public String getColor()
-	{
-		return color;
+        this.Row = row;
+       	this.name = name;
 	}
 
 	public abstract int[][] possibleMoves();
 
 	public abstract String showPossibleMoves();
-
-	public String toString()
-	{
-		String str = this.color + " " + this.name;
-
-		return str;
-	}
-
-	public char getSide()
-	{
-		return color;
-	}
 
 	public int getRow()
 	{
@@ -44,12 +28,10 @@ public abstract class Piece{
 		return Column;
 	}
 
-}
-
-public class move
-{
-	int x;
-	int y;
+	public class move
+	{
+		int x;
+		int y;
 
 	public move(int x, int y)
 	{
@@ -59,6 +41,13 @@ public class move
 
 	public String toString()
 	{
-		System.out.println(x + " " + y);
+		String l = x + " " + y;
+		return l;
 	}
-}
+
+	public char getSide()
+	{
+		return side;
+	}
+
+}}

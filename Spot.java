@@ -18,6 +18,11 @@ public class Spot{
         this.isAvailable = false;
     }
 
+    public Piece getPiece()
+	{
+	     return currentPiece;
+    }
+
 	public void killPiece()
 	{
 		this.currentPiece = null;
@@ -38,7 +43,7 @@ public class Spot{
 
 	public char getPeiceSide()
 	{
-		return currentPeice.getSide();
+		return this.currentPiece.getSide();
 	}
 
     public String toString()

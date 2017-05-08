@@ -1,4 +1,4 @@
-public static class ChessBoard
+public class ChessBoard
 {
 	Spot[][] board;
 
@@ -25,6 +25,23 @@ public static class ChessBoard
 			this.board[row] = this.board[this.board.length - row - 1];//take the last row and replace it with the current row
 			this.board[this.board.length - row - 1] = temp;//take saved current row and set it as the last row
 		}
+	}
+
+	public Spot getSpot(int x, int y)
+	{
+		return this.board[x][y];
+	}
+
+	public void move(Spot currentSpot, Spot targetSpot)
+	{
+		targetSpot.setPiece(currentSpot.getPiece());
+		currentSpot.killPiece();
+	}
+
+	public void move(int currentX, int currentY, int targetX, int targetY)
+	{
+		this.board[targetX][targetY].setPiece(this.board[currentX][currentY].getPiece());
+		this.board[targetX][targetY].killPiece();
 	}
 
 }
