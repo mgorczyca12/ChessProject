@@ -36,11 +36,12 @@ public class ChessGame extends JFrame implements Runnable{
 
 			}
 		};
+		String kek = "topKek";
 		creditsAction = new AbstractAction("Credits"){
 			public void actionPerformed(ActionEvent a){
-				Credits c = new Credits();
-				c.setBounds(0,0,700,700);
-				mainPanel.add(c,2);
+
+				//mainPanel.setLayer(c,20);
+				//System.out.println(mainPanel.getComponentCountInLayer(20));
 			}
 
 		};
@@ -50,14 +51,19 @@ public class ChessGame extends JFrame implements Runnable{
 			}
 		};
 
-		
+
 		JButton play = new JButton(startAction);
 		JButton credits = new JButton(creditsAction);
 		JButton quit = new JButton(exitAction);
 		menu.add(play);
 		menu.add(credits);
 		menu.add(quit);
-		mainPanel.add(menu,1);
+		mainPanel.add(menu);
+		mainPanel.setLayer(menu,0);
+		Credits c = new Credits();
+		c.setBounds(0,0,300,300);
+		mainPanel.add(c);
+		mainPanel.setLayer(c,2);
 
 	}
     public static void main(String []args)
@@ -81,10 +87,20 @@ class Menu extends JPanel {
 
 	}
 }
-class Credits extends JComponent {
+class Credits extends JPanel {
+	GridBagConstraints gbc;
 	public Credits(){
 		super();
-		this.add(new JComponent(){public void paintComponent(Graphics g){g.setColor(new Color(100,200,0));g.fillRect(100,100,100,100);}});
+		this.setLayout(new GridBagLayout());
+		gbc = new GridBagConstraints();
+		gbc.gridwidth = GridBagConstraints.REMAINDER;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 	}
+			public void paintComponent(Graphics g)
+			{
+				g.setColor(new Color(100,200,0));
+				g.fillRect(0,0,100,100);
+			}
+
 }
 
