@@ -6,18 +6,42 @@ public class Pawn extends Piece
 		super(side, row, col, name);
 	}
 
-	public int[][] possibleMoves(Board b)
+	public List<List<Integer>>[] possibleMoves(ChessBoard b)
 	{
-		ArrayList<Integer> moveX = new ArrayList<Integer>();
+		List<List<Integer>> nutralArray = new ArrayList<List<Integer>>();
+		List<List<Integer>> attackArray = new ArrayList<List<Integer>>();
 
+		List<List<Integer>>[] array = new List<List<Integer>>[2];
 
+		Spot r = ChessBoard.getBoard()[super.getRow()+1][super.getCol()+1];
+		Spot c = ChessBoard.getBoard()[super.getRow()][super.getCol()+1];
+		Spot l = ChessBoard.getBoard()[super.getRow()+1][super.getCol()-1];
 
-		if(ChessBoard.getBoard()[super.getRow()+1][super.getCol()+1].getPeiceSide() == 'w' && side == 'b')
+		if(side == 'b')
 		{
-			moveX.add()
+			if(r.checkAvaliability() == false &&  !r.getPiece() == null || r.getPeice().getSide() == 'w')
+			{
+				attackArray.get(0).add(super.getRow()+1, super.getCol()+1);
+			}
 
+			if(c.checkAvailability() == true)
+			{
+				nutralArray.get(0).add(super.getRow(), super.getCol()+1);
+			}
+
+			if(l.checkAvaliability() == false && r.getPeice().getSide == 'w')
+			{
+				attackArray.get(0).add(super.getRow()+1, super.getCol()-1);
+			}
 
 		}
+
+		else if(side == 'w')
+		{
+			if()
+		}
+
+
 
 		return array;
 	}

@@ -2,6 +2,8 @@ public class ChessBoard
 {
 	Spot[][] board;
 
+	public int turn = 1;
+
 	public ChessBoard()
 	{
 		this.board = new Spot[8][8];
@@ -42,6 +44,11 @@ public class ChessBoard
 	{
 		this.board[targetX][targetY].setPiece(this.board[currentX][currentY].getPiece());
 		this.board[targetX][targetY].killPiece();
+	}
+
+	public int getTurn()
+	{
+		return turn;
 	}
 
 }
