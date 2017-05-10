@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Pawn extends Piece
 {
 
@@ -13,9 +15,9 @@ public class Pawn extends Piece
 
 		List<List<Integer>>[] array = new List<List<Integer>>[2];
 
-		Spot r = ChessBoard.getBoard()[super.getRow()+1][super.getCol()+1];
-		Spot c = ChessBoard.getBoard()[super.getRow()][super.getCol()+1];
-		Spot l = ChessBoard.getBoard()[super.getRow()+1][super.getCol()-1];
+		Spot r = b.getBoard()[super.getRow()+1][super.getCol()+1];
+		Spot c = b.getBoard()[super.getRow()][super.getCol()+1];
+		Spot l = b.getBoard()[super.getRow()+1][super.getCol()-1];
 
 		if(side == 'b')
 		{
@@ -24,7 +26,11 @@ public class Pawn extends Piece
 				attackArray.get(0).add(super.getRow()+1, super.getCol()+1);
 			}
 
-			if(c.checkAvailability() == true)
+			if(c.checkAvailability() == true && b.getTurn == 1)
+			{
+				nutralArray.get(0).add(super.getRow(), super.getCol()+2);
+			}
+			else if(c.checkAvailability() == true)
 			{
 				nutralArray.get(0).add(super.getRow(), super.getCol()+1);
 			}
@@ -38,10 +44,28 @@ public class Pawn extends Piece
 
 		else if(side == 'w')
 		{
-			if()
+			if(r.checkAvaliability() == false &&  !r.getPiece() == null || r.getPeice().getSide() == 'b')
+			{
+				attackArray.get(0).add(super.getRow()+1, super.getCol()+1);
+			}
+
+			if(c.checkAvailability() == true && b.getTurn == 1)
+			{
+				nutralArray.get(0).add(super.getRow(), super.getCol()+2);
+			}
+			else if(c.checkAvailability() == true)
+			{
+				nutralArray.get(0).add(super.getRow(), super.getCol()+1);
+			}
+
+			if(l.checkAvaliability() == false && r.getPeice().getSide == 'b')
+			{
+				attackArray.get(0).add(super.getRow()+1, super.getCol()-1);
+			}
 		}
 
-
+		array[0] = nutralArray;
+		array[1] = attackArray;
 
 		return array;
 	}

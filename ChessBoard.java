@@ -18,6 +18,11 @@ public class ChessBoard
 		}
 	}
 
+	public Spot[][] getBoard()
+	{
+		return this.board;
+	}
+
 	public void flipBoard()
 	{
 		//only goes through half of the rows since it would flip the array twice over if it went through them all
@@ -49,6 +54,11 @@ public class ChessBoard
 	public int getTurn()
 	{
 		return turn;
+	}
+
+	public void nextTurn()
+	{
+		turn++;
 	}
 
 }

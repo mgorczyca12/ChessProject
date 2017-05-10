@@ -1,3 +1,5 @@
+import java.util.*;
+
 public abstract class Piece
 {
 
@@ -14,7 +16,7 @@ public abstract class Piece
        	this.name = name;
 	}
 
-	public abstract List<List<Integer>>[] possibleMoves();
+	public abstract List<List<Integer>>[] possibleMoves(ChessBoard b);
 
 	public abstract String showPossibleMoves();
 
