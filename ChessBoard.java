@@ -41,15 +41,46 @@ public class ChessBoard
 
 	public void move(Spot currentSpot, Spot targetSpot)
 	{
-		targetSpot.setPiece(currentSpot.getPiece());
-		currentSpot.killPiece();
+
+		if(currentSpot.getPiece().getSide() == 'w')
+		{
+			if(targetSpot.getPiece().getSide() == 'b')
+			{
+				targetSpot.killPiece();
+				targetSpot.setPiece(currentSpot.getPiece());
+				currentSpot.killPiece();
+			}
+			else
+			{
+				targetSpot.setPiece(currentSpot.getPiece());
+				currentSpot.killPiece();
+			}
+		}
+
+		if(currentSpot.getPiece().getSide() == 'b')
+		{
+			if(targetSpot.getPiece().getSide() == 'w')
+			{
+				targetSpot.killPiece();
+				targetSpot.setPiece(currentSpot.getPiece());
+				currentSpot.killPiece();
+			}
+			else
+			{
+				targetSpot.setPiece(currentSpot.getPiece());
+				currentSpot.killPiece();
+			}
+		}
+
 	}
 
+	/**
 	public void move(int currentX, int currentY, int targetX, int targetY)
 	{
 		this.board[targetX][targetY].setPiece(this.board[currentX][currentY].getPiece());
 		this.board[targetX][targetY].killPiece();
 	}
+	**/
 
 	public int getTurn()
 	{

@@ -16,9 +16,9 @@ public abstract class Piece
        	this.name = name;
 	}
 
-	public abstract List<List<Integer>>[] possibleMoves(ChessBoard b);
+	public abstract List<coordinate> possibleMoves(ChessBoard b);
 
-	public abstract String showPossibleMoves();
+	//public abstract String showPossibleMoves();
 
 	public int getRow()
 	{
