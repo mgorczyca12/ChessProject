@@ -39,9 +39,10 @@ public class ChessGame extends JFrame implements Runnable{
 		String kek = "topKek";
 		creditsAction = new AbstractAction("Credits"){
 			public void actionPerformed(ActionEvent a){
-
-				//mainPanel.setLayer(c,20);
-				//System.out.println(mainPanel.getComponentCountInLayer(20));
+				Credits c = new Credits();
+				c.setBounds(0,0,700,700);
+				mainPanel.add(c,JLayeredPane.MODAL_LAYER + 20);
+				mainPanel.setLayer(c,20);
 			}
 
 		};
@@ -58,12 +59,8 @@ public class ChessGame extends JFrame implements Runnable{
 		menu.add(play);
 		menu.add(credits);
 		menu.add(quit);
-		mainPanel.add(menu);
+		mainPanel.add(menu, JLayeredPane.MODAL_LAYER + 10);
 		mainPanel.setLayer(menu,0);
-		Credits c = new Credits();
-		c.setBounds(0,0,300,300);
-		mainPanel.add(c);
-		mainPanel.setLayer(c,2);
 
 	}
     public static void main(String []args)
@@ -73,9 +70,7 @@ public class ChessGame extends JFrame implements Runnable{
 }
 class Menu extends JPanel {
 	GridBagConstraints gbc;
-	java.util.List<JButton> buttons = new ArrayList<>();
 	public void add(JButton b){
-		buttons.add(b);
 		super.add(b, gbc);
 	}
 	public Menu(){
@@ -87,7 +82,8 @@ class Menu extends JPanel {
 
 	}
 }
-class Credits extends JPanel {
+
+class Credits extends JPanel implements ActionListener {
 	GridBagConstraints gbc;
 	public Credits(){
 		super();
@@ -95,12 +91,25 @@ class Credits extends JPanel {
 		gbc = new GridBagConstraints();
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
+		JButton b = new JButton("Exit");
+		this.addMouseListener(null);
+		b.addActionListener(this);
+		this.add(b,gbc);
+		this.getParent().getComponentInLayer(0)[0].getComponents()[0].get
+
 	}
-			public void paintComponent(Graphics g)
-			{
-				g.setColor(new Color(100,200,0));
-				g.fillRect(0,0,100,100);
-			}
+	public void paintComponent(Graphics g)
+	{
+		g.setColor(new Color(100,200,0));
+		g.drawString("George Li",100,100);
+		g.drawString("Michal Gorczyca",100,200);
+	}
+	public void actionPerformed(ActionEvent a){
+		JComponent parent = (JComponent) this.getParent();
+		parent.remove(this);
+		parent.paint(parent.getGraphics());
+
+	}
 
 }
 
