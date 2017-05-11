@@ -50,7 +50,7 @@ public class ChessGame extends JFrame implements Runnable{
 			}
 		};
 
-		
+
 		JButton play = new JButton(startAction);
 		JButton credits = new JButton(creditsAction);
 		JButton quit = new JButton(exitAction);
