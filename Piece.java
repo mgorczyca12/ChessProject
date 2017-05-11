@@ -1,7 +1,9 @@
+import java.util.*;
+
 public abstract class Piece
 {
 
-	protected final char side;
+	final char side;
 	protected int Column;
 	protected int Row;
 	protected final String name;
@@ -14,9 +16,9 @@ public abstract class Piece
        	this.name = name;
 	}
 
-	public abstract int[][] possibleMoves();
+	public abstract List<coordinate> possibleMoves(ChessBoard b);
 
-	public abstract String showPossibleMoves();
+	//public abstract String showPossibleMoves();
 
 	public int getRow()
 	{
@@ -28,20 +30,9 @@ public abstract class Piece
 		return Column;
 	}
 
-	public class move
-	{
-		int x;
-		int y;
-
-	public move(int x, int y)
-	{
-		this.x = x;
-		this.y = y;
-	}
-
 	public String toString()
 	{
-		String l = x + " " + y;
+		String l = Row + " " + Column;
 		return l;
 	}
 
@@ -50,4 +41,4 @@ public abstract class Piece
 		return side;
 	}
 
-}}
+}

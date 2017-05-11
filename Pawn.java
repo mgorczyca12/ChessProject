@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Pawn extends Piece
 {
 
@@ -6,25 +8,64 @@ public class Pawn extends Piece
 		super(side, row, col, name);
 	}
 
-	public int[][] possibleMoves(Board b)
+	//finds any and all possible moves a pawn can make, weather thats to move up or attack another piece
+	public List<coordinate> possibleMoves(ChessBoard b)
 	{
-		ArrayList<Integer> moveX = new ArrayList<Integer>();
+		ArrayList<coordinate> moves = new ArrayList<>();
 
+		Spot r = b.getSpot(super.getRow()+1, super.getCol()+1); //up: 1, left: 1
+		Spot c = b.getSpot(super.getRow(), super.getCol()+1); //up: 1
+		Spot l = b.getSpot(super.getRow()+1, super.getCol()-1); // up: 1, right: 1
 
-
-		if(ChessBoard.getBoard()[super.getRow()+1][super.getCol()+1].getPeiceSide() == 'w' && side == 'b')
+		//if pawn is black
+		if(side == 'b')
 		{
-			moveX.add()
+			if(r.checkAvailability() == false &&  r.getPiece() != null || r.getPiece().getSide() == 'w')
+			{
+				moves.add(new coordinate(super.getRow()+1, super.getCol()+1));
+			}
 
+			if(c.checkAvailability() == true && b.getTurn() == 1)
+			{
+				moves.add(new coordinate(super.getRow(), super.getCol()+2));
+			}
+			else if(c.checkAvailability() == true)
+			{
+				moves.add(new coordinate(super.getRow(), super.getCol()+1));
+			}
+
+			if(l.checkAvailability() == false && r.getPiece().getSide() == 'w')
+			{
+				moves.add(new coordinate(super.getRow()+1, super.getCol()-1));
+			}
 
 		}
 
-		return array;
-	}
+		//if pawn is white
+		else if(side == 'w')
+		{
+			if(r.checkAvailability() == false &&  r.getPiece() != null || r.getPiece().getSide() == 'b')
+			{
+				moves.add(new coordinate(super.getRow()+1, super.getCol()+1));
+			}
 
-	public String showPossibleMoves()
-	{
+			if(c.checkAvailability() == true && b.getTurn() == 1)
+			{
+				moves.add(new coordinate(super.getRow(), super.getCol()+2));
+			}
+			else if(c.checkAvailability() == true)
+			{
+				moves.add(new coordinate(super.getRow(), super.getCol()+1));
+			}
 
+			if(l.checkAvailability() == false && r.getPiece().getSide() == 'b')
+			{
+				moves.add(new coordinate(super.getRow()+1, super.getCol()-1));
+			}
+
+		}
+
+		return moves;
 	}
 
 }

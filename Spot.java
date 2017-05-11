@@ -43,7 +43,7 @@ public class Spot{
 
 	public char getPeiceSide()
 	{
-		return this.currentPiece.getSide();
+		return this.getPiece().getSide();
 	}
 
     public String toString()
