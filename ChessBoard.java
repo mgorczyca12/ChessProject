@@ -47,12 +47,14 @@ public class ChessBoard
 			if(targetSpot.getPiece().getSide() == 'b')
 			{
 				targetSpot.killPiece();
-				targetSpot.setPiece(currentSpot.getPiece());
+				Piece shallow = (Piece) currentSpot.getPiece().clone();
+				targetSpot.setPiece(shallow);
 				currentSpot.killPiece();
 			}
 			else
 			{
-				targetSpot.setPiece(currentSpot.getPiece());
+				Piece shallow = (Piece) currentSpot.getPiece().clone();
+				targetSpot.setPiece(shallow);
 				currentSpot.killPiece();
 			}
 		}
@@ -62,12 +64,14 @@ public class ChessBoard
 			if(targetSpot.getPiece().getSide() == 'w')
 			{
 				targetSpot.killPiece();
-				targetSpot.setPiece(currentSpot.getPiece());
+				Piece shallow = (Piece) currentSpot.getPiece().clone();
+				targetSpot.setPiece(shallow);
 				currentSpot.killPiece();
 			}
 			else
 			{
-				targetSpot.setPiece(currentSpot.getPiece());
+				Piece shallow = (Piece) currentSpot.getPiece().clone();
+				targetSpot.setPiece(shallow);
 				currentSpot.killPiece();
 			}
 		}

@@ -12,6 +12,16 @@ public class Spot{
         this.y = y;
     }
 
+	public int getSpotRow()
+	{
+		return y;
+	}
+
+	public int getSpotColumn()
+	{
+		return x;
+	}
+
     public void setPiece(Piece chessPiece)
     {
         this.currentPiece = chessPiece;
