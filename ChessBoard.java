@@ -11,7 +11,7 @@ public class ChessBoard
 		//sets all board spots as having an x and a y
 		for(int row = 0; row <= board.length - 1; row++)
 		{
-			for(int col = 0; row <= board[0].length - 1; col++)
+			for(int col = 0; col <= board[0].length - 1; col++)
 			{
 				this.board[row][col] = new Spot(row,col);
 			}
