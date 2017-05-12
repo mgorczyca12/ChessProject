@@ -95,14 +95,14 @@ class Credits extends JPanel implements ActionListener {
 		this.addMouseListener(null);
 		b.addActionListener(this);
 		this.add(b,gbc);
-		this.getParent().getComponentInLayer(0)[0].getComponents()[0].get
+		//this.getParent().getComponentInLayer(0)[0].getComponents()[0].get
 
 	}
 	public void paintComponent(Graphics g)
 	{
 		g.setColor(new Color(100,200,0));
-		g.drawString("George Li",100,100);
-		g.drawString("Michal Gorczyca",100,200);
+		g.drawString("George Li",300,100);
+		g.drawString("Michal Gorczyca",300,200);
 	}
 	public void actionPerformed(ActionEvent a){
 		JComponent parent = (JComponent) this.getParent();
