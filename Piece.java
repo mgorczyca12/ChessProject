@@ -3,6 +3,7 @@ import java.util.*;
 public abstract class Piece
 {
 
+
 	final char side;
 	protected int Column;
 	protected int Row;
@@ -17,6 +18,19 @@ public abstract class Piece
 	}
 
 	public abstract List<coordinate> possibleMoves(ChessBoard b);
+
+	public Object clone()
+	{
+		try
+		{
+			return super.clone();
+		}
+
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
 
 	//public abstract String showPossibleMoves();
 
