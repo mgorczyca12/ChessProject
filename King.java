@@ -1,43 +1,71 @@
 import java.util.*;
-
 public class King extends Piece{
+	public King(char side, String name, ChessBoard b, Spot sp){
+		super(side, name, b, sp);
 
-	public King(char side, int row, int col, String name)
-	{
-		super(side, row, col, name);
 	}
+	public List<Coordinate> fullMoves(){
+		ArrayList<Coordinate> moves = new ArrayList<>();
+		moves.add(new Coordinate(getRow()-1,getCol()-1));
+		moves.add(new Coordinate(getRow()-1,getCol()));
+		moves.add(new Coordinate(getRow()-1,getCol()+1));
+		moves.add(new Coordinate(getRow(),getCol()-1));
+		moves.add(new Coordinate(getRow(),getCol()+1));
+		moves.add(new Coordinate(getRow()+1,getCol()-1));
+		moves.add(new Coordinate(getRow()+1,getCol()));
+		moves.add(new Coordinate(getRow()+1,getCol()+1));
 
-	public List<coordinate> possibleMoves(ChessBoard B)
-	{
-		ArrayList<coordinate> moves = new ArrayList<>();
+		//trims invalid moves
+		for (int i = moves.size()-1; i >= 0; --i)
+			if ((moves.get(i).getRow() < 0 || moves.get(i).getRow() > 7) || (moves.get(i).getCol() < 0 || moves.get(i).getCol() > 7))
+				moves.remove(i);
+		for(int i = moves.size() -1; i >= 0; --i)
+			if (!isAvailable(moves.get(i).getRow(), moves.get(i).getCol()))
+				moves.remove(i);
+		return moves;
+	}
+	public List<Coordinate> possibleMoves(){
+		ArrayList<Coordinate> moves = new ArrayList<>(fullMoves());
 
-		Spot f = B.getSpot(super.getRow()+1, super.getCol());
-		Spot b = B.getSpot(super.getRow()-1, super.getCol());
+		ArrayList<Coordinate> kingMoves = new ArrayList<>();
+		//trims enemy non-king moves
+		////gets the moves
+		ArrayList<Coordinate> enemyMoves = new ArrayList<>();
+		for (Spot[] sps : b.getBoard())
+			for(Spot sp : sps)
+				if (sp.getPiece() != null && sp.getPiece().getSide() !=  getSide() && !sp.getPiece().toString().equals("King"))
+					enemyMoves.addAll(sp.getPiece().possibleMoves());
+				else if(sp.getPiece() != null && sp.getPiece().getSide() !=  getSide() && sp.getPiece().toString().equals("King"))
+					kingMoves.addAll(((King)sp.getPiece()).fullMoves());
+		////removes them
+		ListIterator<Coordinate> iter = enemyMoves.listIterator();
+		while(iter.hasNext())
+			moves.remove(iter.next());
 
-		Spot r = B.getSpot(super.getRow(), super.getCol()+1);
-		Spot l = B.getSpot(super.getRow(), super.getCol()-1);
-
-		if(f.checkAvailability() == true || f.getPiece() != null || f.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(f.getSpotRow(), f.getSpotCol()));
-		}
-		if(b.checkAvailability() == true || b.getPiece() != null || b.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(b.getSpotRow(), b.getSpotCol()));
-		}
+		//takes care of kingmoves
+		for (Spot[] sps : b.getBoard())
+			for (Spot sp : sps)
+				if (sp.getPiece() != null && sp.getPiece().getSide() == getSide() && !sp.getPiece().toString().equals("King"))
+					kingMoves.remove(sp.getPiece().possibleMoves());
+		iter = kingMoves.listIterator();
+		while (iter.hasNext())
+			moves.remove(iter.next());
 
 
-
-		if(l.checkAvailability() == true || l.getPiece() != null || l.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(l.getSpotRow(), l.getSpotCol()));
-		}
-		if(r.checkAvailability() == true || r.getPiece() != null || r.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(r.getSpotRow(), r.getSpotCol()));
-		}
 
 		return moves;
 	}
+	/* vestigial code
+	public boolean checkChecks(){
+		ArrayList<Coordinate> enemyMoves = new ArrayList<>();
+		Coordinate thisCoord = new Coordinate(getRow(),getCol());
+		for (Spot[] sps: b.getBoard())
+			for(Spot sp: sps)
+				if (sp.getPiece() != null && sp.getPiece().getSide() != getSide())
+					enemyMoves.addAll(sp.getPiece().possibleMoves());
+		if (enemyMoves.contains(thisCoord))
+			return true;
+		return false;
 
+	}*/
 }

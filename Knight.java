@@ -1,74 +1,42 @@
 import java.util.*;
-
 public class Knight extends Piece{
 
-	public Knight(char side, int row, int col, String name)
+	public Knight(char side, String name, ChessBoard b, Spot sp)
 	{
-		super(side, row, col, name);
+		super(side, name, b, sp);
 	}
 
 	//finds any and all possible moves a pawn can make, weather thats to move up or attack another piece
-	public List<coordinate> possibleMoves(ChessBoard b)
+	public List<Coordinate> possibleMoves()
 	{
-		ArrayList<coordinate> moves = new ArrayList<>();
-
-
-		//spots infront of piece
-		Spot r1 = b.getSpot(super.getRow()+2, super.getCol()+1);
-		Spot r2 = b.getSpot(super.getRow()+1, super.getCol()+2);
-
-		Spot l1 = b.getSpot(super.getRow()+2, super.getCol()-1);
-		Spot l2 = b.getSpot(super.getRow()+1, super.getCol()-2);
-
-		//spots behind piece
-		Spot br1 = b.getSpot(super.getRow()+2, super.getCol()+1);
-		Spot br2 = b.getSpot(super.getRow()+1, super.getCol()+2);
-
-		Spot bl1 = b.getSpot(super.getRow()+2, super.getCol()+1);
-		Spot bl2 = b.getSpot(super.getRow()+1, super.getCol()+2);
-
-
-
-		if(r1.checkAvailability() == true || r1.getPiece() != null || r1.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(r1.getSpotRow(), r1.getSpotCol()));
+		ArrayList<Coordinate> moves = new ArrayList<>();
+		//two up, adjacent horizontally
+		if (getCol() > 1){
+			if (getRow() < 7 && isAvailable(getRow()+1,getCol()-2))
+				moves.add(new Coordinate(getRow()+1, getCol()-2));
+			if (getRow() > 0 && isAvailable(getRow()-1,getCol()-2))
+				moves.add(new Coordinate(getRow()-1, getCol()-2));
 		}
-		if(r2.checkAvailability() == true || r2.getPiece() != null || r2.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(r2.getSpotRow(), r2.getSpotCol()));
+		//two down, adjacent horizontally
+		if (getCol() < 6){
+			if (getRow() < 7 && isAvailable(getRow()+1,getCol()+2))
+				moves.add(new Coordinate(getRow()+1, getCol()+2));
+			if (getRow() > 0 && isAvailable(getRow()-1,getCol()+2))
+				moves.add(new Coordinate(getRow()-1, getCol()+2));
 		}
-
-
-
-		if(l1.checkAvailability() == true || l1.getPiece() != null || l1.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(l1.getSpotRow(), l1.getSpotCol()));
+		//two right, adjacent vertically
+		if (getRow() < 6) {
+			if (getCol() < 7 && isAvailable(getRow()+2,getCol()+1))
+				moves.add(new Coordinate(getRow()+2, getCol()+1));
+			if (getCol() > 0 && isAvailable(getRow()+2,getCol()-1))
+				moves.add(new Coordinate(getRow()+2, getCol()-1));
 		}
-		if(l2.checkAvailability() == true || l2.getPiece() != null || l2.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(l2.getSpotRow(), l2.getSpotCol()));
-		}
-
-
-
-		if(br1.checkAvailability() == true || br1.getPiece() != null || br1.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(br1.getSpotRow(), br1.getSpotCol()));
-		}
-		if(br2.checkAvailability() == true || br2.getPiece() != null || br2.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(br2.getSpotRow(), br2.getSpotCol()));
-		}
-
-
-
-		if(bl1.checkAvailability() == true || bl1.getPiece() != null || bl1.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(bl1.getSpotRow(), bl1.getSpotCol()));
-		}
-		if(bl2.checkAvailability() == true || bl2.getPiece() != null || bl2.getPiece().getSide() != super.getSide())
-		{
-			moves.add(new coordinate(bl2.getSpotRow(), bl2.getSpotCol()));
+		//two left, adjacent vertically
+		if (getRow() > 1){
+			if (getCol() < 7 && isAvailable(getRow()-2,getCol()+1))
+				moves.add(new Coordinate(getRow()-2, getCol()+1));
+			if (getCol() > 0 && isAvailable(getRow()-2,getCol()-1))
+				moves.add(new Coordinate(getRow()-2, getCol()-1));
 		}
 
 		return moves;

@@ -1,31 +1,28 @@
 public class Spot{
 
-    private boolean isAvailable;
     public Piece currentPiece;
 	int x, y;
 
     public Spot(int x, int y)
     {
-        this.isAvailable = true;
-        this.currentPiece = null;
         this.x = x;
         this.y = y;
     }
 
-	public int getSpotRow()
-	{
-		return y;
-	}
-
-	public int getSpotCol()
+	public int getRow()
 	{
 		return x;
+	}
+
+	public int getCol()
+
+	{
+		return y;
 	}
 
     public void setPiece(Piece chessPiece)
     {
         this.currentPiece = chessPiece;
-        this.isAvailable = false;
     }
 
     public Piece getPiece()
@@ -36,32 +33,21 @@ public class Spot{
 	public void killPiece()
 	{
 		this.currentPiece = null;
-		this.isAvailable = true;
 	}
 
-    public boolean checkAvailability()
+    public boolean isOpen()
     {
-        if(this.isAvailable == true)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return currentPiece == null;
     }
 
-	public char getPeiceSide()
+	public char getPieceSide()
 	{
 		return this.getPiece().getSide();
 	}
 
     public String toString()
     {
-		String str = "\nCurrent Piece: " + currentPiece.toString();
-		str += "Current Peice at " + this.x + ":" + this.y;
-
-		return str;
+		return String.format("%9s,(%d,%d)%c;",(isOpen() ? "null" : currentPiece), x, y,(getPiece() != null ? getPieceSide() : '0'));
 	}
 
 }
