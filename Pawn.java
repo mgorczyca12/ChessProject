@@ -3,67 +3,34 @@ import java.util.*;
 public class Pawn extends Piece
 {
 
-	public Pawn(char side, int row, int col, String name)
+	public Pawn(char side, String name, ChessBoard b, Spot sp)
 	{
-		super(side, row, col, name);
+		super(side, name, b, sp);
 	}
 
 	//finds any and all possible moves a pawn can make, weather thats to move up or attack another piece
-	public List<coordinate> possibleMoves(ChessBoard b)
+	public List<Coordinate> possibleMoves()
 	{
-		ArrayList<coordinate> moves = new ArrayList<>();
 
-		Spot r = b.getSpot(super.getRow()+1, super.getCol()+1); //up: 1, left: 1
-		Spot c = b.getSpot(super.getRow(), super.getCol()+1); //up: 1
-		Spot l = b.getSpot(super.getRow()+1, super.getCol()-1); // up: 1, right: 1
+		int dir = 0;
+		ArrayList<Coordinate> moves = new ArrayList<>();
+		if (side == 'w')
+			dir = -1;
+		if (side == 'b')
+			dir = 1;
+		//front
+		if(getRow() > 0 && b.getSpot(getRow()+dir,getCol()).isOpen())
+			moves.add(new Coordinate(getRow()+dir,getCol()));
 
-		//if pawn is black
-		if(side == 'b')
-		{
-			if(r.checkAvailability() == false &&  r.getPiece() != null || r.getPiece().getSide() == 'w')
-			{
-				moves.add(new coordinate(super.getRow()+1, super.getCol()+1));
-			}
+		//diagonals
+		if(getCol() < 7 && isEnemy(getRow()+dir,getCol()+1))
+			moves.add(new Coordinate(getRow()+dir,getCol()+1));
+		if(getCol() > 0 && isEnemy(getRow()+dir,getCol()-1))
+			moves.add(new Coordinate(getRow()+dir,getCol()-1));
 
-			if(c.checkAvailability() == true && b.getTurn() == 1)
-			{
-				moves.add(new coordinate(super.getRow(), super.getCol()+2));
-			}
-			else if(c.checkAvailability() == true)
-			{
-				moves.add(new coordinate(super.getRow(), super.getCol()+1));
-			}
-
-			if(l.checkAvailability() == false && r.getPiece().getSide() == 'w')
-			{
-				moves.add(new coordinate(super.getRow()+1, super.getCol()-1));
-			}
-
-		}
-
-		//if pawn is white
-		else if(side == 'w')
-		{
-			if(r.checkAvailability() == false &&  r.getPiece() != null || r.getPiece().getSide() == 'b')
-			{
-				moves.add(new coordinate(super.getRow()+1, super.getCol()+1));
-			}
-
-			if(c.checkAvailability() == true && b.getTurn() == 1)
-			{
-				moves.add(new coordinate(super.getRow(), super.getCol()+2));
-			}
-			else if(c.checkAvailability() == true)
-			{
-				moves.add(new coordinate(super.getRow(), super.getCol()+1));
-			}
-
-			if(l.checkAvailability() == false && r.getPiece().getSide() == 'b')
-			{
-				moves.add(new coordinate(super.getRow()+1, super.getCol()-1));
-			}
-
-		}
+		//initial two
+		if (getMoves() == 0)
+			moves.add(new Coordinate(getRow()+2*dir, getCol()));
 
 		return moves;
 	}

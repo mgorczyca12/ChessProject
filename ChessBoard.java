@@ -1,3 +1,4 @@
+import java.util.*;
 public class ChessBoard
 {
 	Spot[][] board;
@@ -42,49 +43,49 @@ public class ChessBoard
 	public void move(Spot currentSpot, Spot targetSpot)
 	{
 
-		if(currentSpot.getPiece().getSide() == 'w')
+		if (targetSpot.getPiece() == null)
 		{
-			if(targetSpot.getPiece().getSide() == 'b')
-			{
-				targetSpot.killPiece();
-				Piece shallow = (Piece) currentSpot.getPiece().clone();
-				targetSpot.setPiece(shallow);
-				currentSpot.killPiece();
-			}
-			else
-			{
-				Piece shallow = (Piece) currentSpot.getPiece().clone();
-				targetSpot.setPiece(shallow);
-				currentSpot.killPiece();
-			}
+			targetSpot.setPiece(currentSpot.getPiece());
+			targetSpot.getPiece().setSpot(targetSpot);
+			currentSpot.killPiece();
+			targetSpot.getPiece().moved();
 		}
-
-		if(currentSpot.getPiece().getSide() == 'b')
+		else if(currentSpot.getPiece().getSide() != targetSpot.getPiece().getSide())
 		{
-			if(targetSpot.getPiece().getSide() == 'w')
-			{
-				targetSpot.killPiece();
-				Piece shallow = (Piece) currentSpot.getPiece().clone();
-				targetSpot.setPiece(shallow);
-				currentSpot.killPiece();
-			}
-			else
-			{
-				Piece shallow = (Piece) currentSpot.getPiece().clone();
-				targetSpot.setPiece(shallow);
-				currentSpot.killPiece();
-			}
+			targetSpot.killPiece();
+			targetSpot.setPiece(currentSpot.getPiece());
+			targetSpot.getPiece().setSpot(targetSpot);
+			currentSpot.killPiece();
+			targetSpot.getPiece().moved();
 		}
 
 	}
 
-	/**
-	public void move(int currentX, int currentY, int targetX, int targetY)
-	{
-		this.board[targetX][targetY].setPiece(this.board[currentX][currentY].getPiece());
-		this.board[targetX][targetY].killPiece();
+	public static void main(String[] args){
+		Player w = new Player('w');
+		Player bl = new Player('b');
+		ChessBoard b = new ChessBoard();
+		bl.initializeBoard(b);
+		b.flipBoard();
+		w.initializeBoard(b);
+		b.flipBoard();
+		int x1 = 0, x2 = 0;
+		int y1 = 0, y2 = 0;
+		List<Coordinate> co;
+		Scanner s = new Scanner(System.in);
+		while (true){
+			System.out.println(b);
+			x1 = s.nextInt();
+			y1 = s.nextInt();
+			co = b.getSpot(x1,y1).getPiece().possibleMoves();
+			System.out.println(co);
+			x2 = s.nextInt();
+			y2 = s.nextInt();
+			b.move(b.getSpot(x1,y1),b.getSpot(x2,y2));
+
+		}
+
 	}
-	**/
 
 	public int getTurn()
 	{
@@ -94,6 +95,15 @@ public class ChessBoard
 	public void nextTurn()
 	{
 		turn++;
+	}
+	public String toString(){
+		String str = "";
+		for (Spot[] sps : board){
+			for (Spot sp : sps)
+				str += sp;
+			str += "\n";
+		}
+		return str;
 	}
 
 }

@@ -15,7 +15,7 @@ public class ChessGame extends JFrame implements Runnable{
 
 	public void run(){
 
-		this.setSize(700,700);
+		this.setSize(800,800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Chess Game");
 		this.setLayout(null);
@@ -32,12 +32,14 @@ public class ChessGame extends JFrame implements Runnable{
 
 		startAction = new AbstractAction("Start"){
 			public void actionPerformed(ActionEvent a){
-				//to be implemented
-
+				GirafficalChessBoard b = new GirafficalChessBoard();
+				b.setBounds(0,0,700,700);
+				mainPanel.add(b,JLayeredPane.MODAL_LAYER + 30);
+				mainPanel.setLayer(b,30);
+				b.run();
 			}
 		};
-		String kek = "topKek";
-		creditsAction = new AbstractAction("Credits"){
+		creditsAction = new AbstractAction("Information/How to play"){
 			public void actionPerformed(ActionEvent a){
 				Credits c = new Credits();
 				c.setBounds(0,0,700,700);
@@ -51,7 +53,6 @@ public class ChessGame extends JFrame implements Runnable{
 				System.exit(0);
 			}
 		};
-
 
 		JButton play = new JButton(startAction);
 		JButton credits = new JButton(creditsAction);
@@ -101,8 +102,15 @@ class Credits extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g)
 	{
 		g.setColor(new Color(100,200,0));
-		g.drawString("George Li",300,100);
-		g.drawString("Michal Gorczyca",300,200);
+		g.setFont(new Font("TimesRoman", Font.BOLD, 24));
+		g.drawString("Made By:",200,50);
+		g.drawString("George Li",200,70);
+		g.drawString("Michal Gorczyca",200,90);
+		g.drawString("Rules",200,110);
+		g.drawString("Follows international chess rules except:",200,130);
+		g.drawString("No En Passant.",200,150);
+		g.drawString("No Castling.",200,170);
+		g.drawString("Click to move things.",200,190);
 	}
 	public void actionPerformed(ActionEvent a){
 		JComponent parent = (JComponent) this.getParent();

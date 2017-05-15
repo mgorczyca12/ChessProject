@@ -1,99 +1,23 @@
+import java.util.*;
 public class Queen extends Piece{
 
-	public Queen(char side, int row, int col, String name)
+	public Queen(char side, String name, ChessBoard b, Spot sp)
 	{
-		super(side, row, col, name);
+		super(side, name, b, sp);
 	}
 
-	public List<coordinate> possibleMoves(ChessBoard b)
+	public List<Coordinate> possibleMoves()
 	{
-		int i = 1;
-		ArrayList<coordinate> moves = new ArrayList<>();
+		ArrayList<Coordinate> moves = new ArrayList<>();
+		moves.addAll(checkDiagonal(1,1));
+		moves.addAll(checkDiagonal(-1,1));
+		moves.addAll(checkDiagonal(1,-1));
+		moves.addAll(checkDiagonal(-1,-1));
+		moves.addAll(checkHorizontal(1));
+		moves.addAll(checkHorizontal(-1));
+		moves.addAll(checkVertical(1));
+		moves.addAll(checkVertical(-1));
 
-		while(b.getSpot(super.getRow + i, super.getCol).checkAvailability() != false || b.getSpot(super.getRow + i, super.getCol).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow + i, super.getCol).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow + i, super.getCol));
-			}
-			i++;
-		}
-
-		i = 1;
-
-		while(b.getSpot(super.getRow - i, super.getCol).checkAvailability() != false || b.getSpot(super.getRow - i, super.getCol).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow - i, super.getCol).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow - i, super.getCol));
-			}
-			i++;
-		}
-
-		i = 1;
-
-		while(b.getSpot(super.getRow, super.getCol + i).checkAvailability() != false || b.getSpot(super.getRow, super.getCol + i).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow, super.getCol + i).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow, super.getCol + i));
-			}
-			i++;
-		}
-
-		i = 1;
-
-		while(b.getSpot(super.getRow, super.getCol - i).checkAvailability() != false || b.getSpot(super.getRow, super.getCol - i).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow, super.getCol - i).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow, super.getCol - i));
-			}
-			i++;
-
-		}
-
-		while(b.getSpot(super.getRow + i, super.getCol + i).checkAvailability() != false || b.getSpot(super.getRow + i, super.getCol + i).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow + i, super.getCol + i).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow + i, super.getCol + i));
-			}
-			i++;
-		}
-
-		i = 1;
-
-		while(b.getSpot(super.getRow - i, super.getCol - i).checkAvailability() != false || b.getSpot(super.getRow - i, super.getCol - i).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow - i, super.getCol - i).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow - i, super.getCol - i));
-			}
-			i++;
-		}
-
-		i = 1;
-
-		while(b.getSpot(super.getRow - i, super.getCol + i).checkAvailability() != false || b.getSpot(super.getRow - i, super.getCol + i).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow - i, super.getCol + i).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow - i, super.getCol + i));
-			}
-			i++;
-		}
-
-		i = 1;
-
-		while(b.getSpot(super.getRow + i, super.getCol - i).checkAvailability() != false || b.getSpot(super.getRow + i, super.getCol - i).getSide() != super.getSide() || i > 8)
-		{
-			if(b.getSpot(super.getRow + i, super.getCol - i).getRow() >= 0)
-			{
-				moves.add(new coordinate(super.getRow + i, super.getCol - i));
-			}
-			i++;
-		}
 
 		return moves;
 
