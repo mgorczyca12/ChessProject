@@ -1,6 +1,8 @@
+import java.util.*;
+
 public class Knight extends Piece{
 
-	public Kinght(char side, int row, int col, String name)
+	public Knight(char side, int row, int col, String name)
 	{
 		super(side, row, col, name);
 	}
@@ -27,46 +29,46 @@ public class Knight extends Piece{
 
 
 
-		if(r1.checkAvailability() == true || r1.getPiece() != null || r1.getSide() != super.getSide())
+		if(r1.checkAvailability() == true || r1.getPiece() != null || r1.getPiece().getSide() != super.getSide())
 		{
-			moves.add(new coordinate(r1.getRow(), r1.getCol()));
+			moves.add(new coordinate(r1.getSpotRow(), r1.getSpotCol()));
 		}
-		if(r2.checkAvailability() == true || r2.getPiece() != null || r2.getSide() != super.getSide())
+		if(r2.checkAvailability() == true || r2.getPiece() != null || r2.getPiece().getSide() != super.getSide())
 		{
-			moves.add(new coordinate(r2.getRow(), r2.getCol()));
-		}
-
-
-
-		if(l1.checkAvailability() == true || l1.getPiece() != null || l1.getSide() != super.getSide())
-		{
-			moves.add(new coordinate(l1.getRow(), l1.getCol()));
-		}
-		if(l2.checkAvailability() == true || l2.getPiece() != null || l2.getSide() != super.getSide())
-		{
-			moves.add(new coordinate(l2.getRow(), l2.getCol()));
+			moves.add(new coordinate(r2.getSpotRow(), r2.getSpotCol()));
 		}
 
 
 
-		if(br1.checkAvailability() == true || br1.getPiece() != null || br1.getSide() != super.getSide())
+		if(l1.checkAvailability() == true || l1.getPiece() != null || l1.getPiece().getSide() != super.getSide())
 		{
-			moves.add(new coordinate(br1.getRow(), br1.getCol()));
+			moves.add(new coordinate(l1.getSpotRow(), l1.getSpotCol()));
 		}
-		if(br2.checkAvailability() == true || br2.getPiece() != null || br2.getSide() != super.getSide())
+		if(l2.checkAvailability() == true || l2.getPiece() != null || l2.getPiece().getSide() != super.getSide())
 		{
-			moves.add(new coordinate(br2.getRow(), br2.getCol()));
+			moves.add(new coordinate(l2.getSpotRow(), l2.getSpotCol()));
 		}
 
 
 
-		if(br1.checkAvailability() == true || bl1.getPiece() != null || bl1.getSide() != super.getSide())
+		if(br1.checkAvailability() == true || br1.getPiece() != null || br1.getPiece().getSide() != super.getSide())
 		{
-			moves.add(new coordinate(bl1.getRow(), bl1.getCol()));
+			moves.add(new coordinate(br1.getSpotRow(), br1.getSpotCol()));
 		}
-		if(br1.checkAvailability() == true || bl2.getPiece() != null || bl2.getSide() != super.getSide())
+		if(br2.checkAvailability() == true || br2.getPiece() != null || br2.getPiece().getSide() != super.getSide())
 		{
-			moves.add(new coordinate(bl2.getRow(), bl1.getCol()));
+			moves.add(new coordinate(br2.getSpotRow(), br2.getSpotCol()));
+		}
+
+
+
+		if(bl1.checkAvailability() == true || bl1.getPiece() != null || bl1.getPiece().getSide() != super.getSide())
+		{
+			moves.add(new coordinate(bl1.getSpotRow(), bl1.getSpotCol()));
+		}
+		if(bl2.checkAvailability() == true || bl2.getPiece() != null || bl2.getPiece().getSide() != super.getSide())
+		{
+			moves.add(new coordinate(bl2.getSpotRow(), bl2.getSpotCol()));
 		}
 
 		return moves;

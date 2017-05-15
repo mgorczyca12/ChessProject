@@ -44,6 +44,16 @@ public abstract class Piece
 		return Column;
 	}
 
+	public void setRow(int y)
+	{
+		this.Row = y;
+	}
+
+	public void setCol(int x)
+	{
+		this.Column = x;
+	}
+
 	public String toString()
 	{
 		String l = Row + " " + Column;

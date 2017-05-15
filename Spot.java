@@ -17,7 +17,7 @@ public class Spot{
 		return y;
 	}
 
-	public int getSpotColumn()
+	public int getSpotCol()
 	{
 		return x;
 	}

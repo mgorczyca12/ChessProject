@@ -49,12 +49,17 @@ public class ChessBoard
 				targetSpot.killPiece();
 				Piece shallow = (Piece) currentSpot.getPiece().clone();
 				targetSpot.setPiece(shallow);
+				targetSpot.getPiece().setRow(targetSpot.getSpotRow());
+				targetSpot.getPiece().setCol(targetSpot.getSpotCol());
+
 				currentSpot.killPiece();
 			}
 			else
 			{
 				Piece shallow = (Piece) currentSpot.getPiece().clone();
 				targetSpot.setPiece(shallow);
+				targetSpot.getPiece().setRow(targetSpot.getSpotRow());
+				targetSpot.getPiece().setCol(targetSpot.getSpotCol());
 				currentSpot.killPiece();
 			}
 		}
@@ -66,12 +71,16 @@ public class ChessBoard
 				targetSpot.killPiece();
 				Piece shallow = (Piece) currentSpot.getPiece().clone();
 				targetSpot.setPiece(shallow);
+				targetSpot.getPiece().setRow(targetSpot.getSpotRow());
+				targetSpot.getPiece().setCol(targetSpot.getSpotCol());
 				currentSpot.killPiece();
 			}
 			else
 			{
 				Piece shallow = (Piece) currentSpot.getPiece().clone();
 				targetSpot.setPiece(shallow);
+				targetSpot.getPiece().setRow(targetSpot.getSpotRow());
+				targetSpot.getPiece().setCol(targetSpot.getSpotCol());
 				currentSpot.killPiece();
 			}
 		}
