@@ -29,7 +29,7 @@ public class Pawn extends Piece
 			moves.add(new Coordinate(getRow()+dir,getCol()-1));
 
 		//initial two
-		if (getMoves() == 0)
+		if (getMoves() == 0 && b.getSpot(getRow()+2*dir, getCol()).isOpen())
 			moves.add(new Coordinate(getRow()+2*dir, getCol()));
 
 		return moves;
