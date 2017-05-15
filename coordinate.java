@@ -1,11 +1,11 @@
-public class coordinate
+public class Coordinate
 {
-	int row,column;
+	int row,col;
 
-	public coordinate(int x, int y)
+	public Coordinate(int x, int y)
 	{
 		this.row = x;
-		this.column = y;
+		this.col = y;
 	}
 
 	public int getRow()
@@ -13,9 +13,17 @@ public class coordinate
 		return row;
 	}
 
-	public int getColumn()
+	public int getCol()
 	{
-		return column;
+		return col;
+	}
+	public boolean equals(Object o){
+		Coordinate c = (Coordinate) o;
+		return (c.getRow() == getRow()) && (c.getCol() == getCol());
+
+	}
+	public String toString(){
+		return String.format("(%d,%d)",row,col);
 	}
 
 }
